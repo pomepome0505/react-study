@@ -1,11 +1,23 @@
 import Head from "next/head";
-import { useState } from 'react'
+const url = "http://localhost:3000/data.json"
 
-export default function Home() {
-  const [count, setCount] = useState(0)
-  const onBtnClick = () => {
-    setCount(count + 1)
+export async function getServerSideProps(context) {
+  const result = await fetch(url)
+  const data = await result.json()
+  const n = Math.floor(Math.random() * data.length)
+  console.log(data[n])
+  return {
+    props:data[n]
   }
+}
+
+type Props = {
+  message: String
+  name: String
+  email: String
+}
+
+export default function Home(props: Props) {
   return (
     <div>
       <Head>
@@ -13,12 +25,10 @@ export default function Home() {
       </Head>
       <main className="container">
         <h2>Index page.</h2>
-        <p className="alert alert-primary h5 my-3">
-          count: {count} times.
-        </p>
-        <button className="btn btn-primary" onClick={onBtnClick}>
-          Click
-        </button>
+        <div className="alert alert-primary my-3">
+          <p className="h5">msg:{props.message}.</p>
+          <p className="h6">by {props.name}.（{props.email}）</p>
+        </div>
       </main>
     </div>
   )
