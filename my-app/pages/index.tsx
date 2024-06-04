@@ -4,8 +4,8 @@ const url = "http://localhost:3000/data.json"
 export async function getServerSideProps(context) {
   const result = await fetch(url)
   const data = await result.json()
-  const n = Math.floor(Math.random() * data.length)
-  console.log(data[n])
+  const n = context.query.id == undefined ? 0
+    : context.query.id >= data.length ? 0 : context.query.id
   return {
     props:data[n]
   }
