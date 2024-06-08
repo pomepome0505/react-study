@@ -5,7 +5,8 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 
 export default function App({ Component, pageProps }: AppProps) {
-  const date = new Date().toLocaleTimeString()
+  pageProps.appname = "My Next App"
+  pageProps.author = "SYODA-Tuyano"
   return <div>
     <Head>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
