@@ -11,16 +11,17 @@ type Props = {
 
 }
 
+
 export default function Home(props: Props) {
-  const [item,setItem] = useState({name:'',email:'',tel:''})
+  const [params, setParams] = useState<string[]>([])
   const router = useRouter()
 
   useEffect(() => {
     if(!router.isReady) return
-    let { num } = router.query
-    if (!num) return
-    const setNum: number = +num < data.length ? +num : 0
-    setItem(data[setNum])
+    console.log(router.query.params)
+    const queryParams = router.query.params
+    if (!Array.isArray(queryParams)) return
+    setParams(queryParams)
   }, [router.isReady])
 
   return (
@@ -30,17 +31,17 @@ export default function Home(props: Props) {
         <table className="table">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Tel</th>
+              <th>No.</th>
+              <th>value</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>{item.name}</td>
-              <td>{item.email}</td>
-              <td>{item.tel}</td>
+            {params.map((value,index)=>(
+            <tr key={index}>
+              <th width="100px">{index}</th>
+              <td>{value}</td>
             </tr>
+            ))}
           </tbody>
         </table>
       </div>
