@@ -22,7 +22,7 @@ const modal = {
   padding:"20px"
 }
 
-Ohter.getPage = function(page) {
+Ohter.getPage = function(page: JSX.Element): JSX.Element {
   return (
     <div>
       <h6 className="text-danger text-center">*** development mode ***</h6>
